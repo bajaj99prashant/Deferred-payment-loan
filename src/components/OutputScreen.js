@@ -95,17 +95,8 @@ const OutputScreen = () => {
                 <h3>Your monthly payment</h3>
                 <h1>
                   <span>₹</span>
-                  {state.amount !== null
-                    ? state.amount > 0
-                      ? parseFloat(state.amount / state.time).toLocaleString(
-                          "en-IN",
-                          {
-                            maximumFractionDigits: 2,
-                            style: "currency",
-                            currency: "INR",
-                          }
-                        )
-                      : "0.00"
+                  {state.amount > 0 && !isNaN(state.amount)
+                    ? formattedAmount
                     : "0.00"}
                 </h1>
               </div>
@@ -115,14 +106,29 @@ const OutputScreen = () => {
                   <span>
                     ₹
                     {state.principal !== null
-                      ? parseFloat(state.principal).toFixed(2)
+                      ? Number(
+                          parseFloat(state.principal).toFixed(2)
+                        ).toLocaleString("en", {
+                          minimumFractionDigits: 2,
+                        })
                       : "0.00"}
                   </span>
                 </div>
                 <div>
                   <h5>Total interest paid</h5>
                   <span>
-                    ₹{parseFloat(state.amount - state.principal).toFixed(2)}
+                    ₹
+                    {!isNaN(state.amount)
+                      ? state.time > 0 && state.principal > 0
+                        ? Number(
+                            parseFloat(
+                              state.amount * state.time - state.principal
+                            ).toFixed(2)
+                          ).toLocaleString("en", {
+                            minimumFractionDigits: 2,
+                          })
+                        : parseFloat(state.amount - state.principal).toFixed(2)
+                      : "0.00"}
                   </span>
                 </div>
               </div>
