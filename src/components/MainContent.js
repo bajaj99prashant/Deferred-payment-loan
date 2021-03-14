@@ -22,12 +22,21 @@ const MainContent = () => {
     e.preventDefault();
     const amount =
       parseInt(principal) + parseInt((principal * rate * time) / 100);
-    dispatch({
-      type: "INTEREST_CALCULATED",
-      amount: amount,
-      time: time,
-      principal: principal,
-    });
+    if (amount > 0) {
+      dispatch({
+        type: "INTEREST_CALCULATED",
+        amount: amount,
+        time: time,
+        principal: principal,
+      });
+    } else {
+      dispatch({
+        type: "INTEREST_CALCULATED",
+        amount: null,
+        time: time,
+        principal: principal,
+      });
+    }
   };
 
   return (
@@ -42,8 +51,8 @@ const MainContent = () => {
         <div className="bi-section">
           <div className="input-group">
             <div className="label-group">
-              <span>Pricipal</span>
-              <span>{principal}</span>
+              <span>Principal</span>
+              <span>{(principal / 100000).toFixed(2)} Lakhs</span>
             </div>
             <div className="slider-wrapper">
               <div className="show-value">
@@ -75,7 +84,7 @@ const MainContent = () => {
           <div className="input-group input-group-margin">
             <div className="label-group">
               <span>Rate</span>
-              <span>{rate}</span>
+              <span>{rate}% P.A.</span>
             </div>
             <div className="slider-wrapper">
               <div className="show-value">
@@ -101,7 +110,7 @@ const MainContent = () => {
           <div className="input-group">
             <div className="label-group">
               <span>Time</span>
-              <span>{time}</span>
+              <span>{time} Yrs</span>
             </div>
             <div className="slider-wrapper">
               <div className="show-value">

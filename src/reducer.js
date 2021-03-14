@@ -2,6 +2,7 @@ export const initialState = {
   amount: null,
   time: null,
   principal: null,
+  count: 0,
 };
 
 const reducer = (state, action) => {
@@ -12,6 +13,7 @@ const reducer = (state, action) => {
         amount: action.amount,
         time: action.time,
         principal: action.principal,
+        count: state.count + 1,
       };
 
     default:

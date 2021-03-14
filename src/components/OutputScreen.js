@@ -10,7 +10,7 @@ const OutputScreen = () => {
     if (state.amount !== null || window.innerWidth > 992) {
       setShowOutput(true);
     }
-  }, [state.amount]);
+  }, [state.count]);
 
   const closeOutput = () => {
     setShowOutput(false);

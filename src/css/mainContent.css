@@ -199,6 +199,11 @@ input[type="range"]::-moz-range-track {
     margin: 1rem 5%;
   }
 
+  .main-content > h1 {
+    font-size: 2rem;
+    line-height: 2.4rem;
+  }
+
   .bi-section {
     display: flex;
     flex-direction: column;
@@ -211,7 +216,7 @@ input[type="range"]::-moz-range-track {
   }
 
   .input-group {
-    width: 400px;
-    min-width: 200px;
+    width: 500px;
+    min-width: 300px;
   }
 }
