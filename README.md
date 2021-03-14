@@ -6,7 +6,7 @@ The design of the project is inspired by the design of [**Vladimir Gruev's**](ht
 
 <br>
 
-<img src="./screenshots/screenshot1.png" alt="home-page">
+[<img src="./screenshots/screenshot1.png" alt="home-page">](https://deferred-loan-payment.netlify.app/)
 
 <br>
 <br>
