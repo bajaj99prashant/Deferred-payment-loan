@@ -42,7 +42,7 @@ const MainContent = () => {
         principal: principal,
       });
     } else {
-      const amount = parseFloat(principal * newRate) + parseFloat(principal);
+      const amount = parseFloat(principal);
       console.log(amount);
       dispatch({
         type: "INTEREST_CALCULATED",
