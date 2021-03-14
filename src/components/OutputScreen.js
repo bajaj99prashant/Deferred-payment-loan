@@ -5,10 +5,26 @@ import { useStateValue } from "../DataLayer";
 const OutputScreen = () => {
   const [state] = useStateValue();
   const [showOutput, setShowOutput] = useState(false);
+  const [formattedAmount, setFormattedAmount] = useState("0.00");
 
   useEffect(() => {
     if (state.amount !== null || window.innerWidth > 992) {
       setShowOutput(true);
+      let x = parseFloat(state.amount).toFixed(2);
+      x = x.toString();
+      let afterPoint = "";
+      if (x.indexOf(".") > 0)
+        afterPoint = x.substring(x.indexOf("."), x.length);
+      x = Math.floor(x);
+      x = x.toString();
+      let lastThree = x.substring(x.length - 3);
+      const otherNumbers = x.substring(0, x.length - 3);
+      if (otherNumbers != "") lastThree = "," + lastThree;
+      const res =
+        otherNumbers.replace(/\B(?=(\d{2})+(?!\d))/g, ",") +
+        lastThree +
+        afterPoint;
+      setFormattedAmount(res);
     }
   }, [state.count]);
 
@@ -22,9 +38,7 @@ const OutputScreen = () => {
         <h3>Your monthly payment</h3>
         <h1>
           <span>₹</span>
-          {state.amount > 0 && !isNaN(state.amount)
-            ? parseFloat(state.amount).toFixed(2)
-            : "0.00"}
+          {state.amount > 0 && !isNaN(state.amount) ? formattedAmount : "0.00"}
         </h1>
         <div>
           <h5>Total principal paid</h5>
@@ -83,7 +97,14 @@ const OutputScreen = () => {
                   <span>₹</span>
                   {state.amount !== null
                     ? state.amount > 0
-                      ? parseFloat(state.amount / state.time).toFixed(2)
+                      ? parseFloat(state.amount / state.time).toLocaleString(
+                          "en-IN",
+                          {
+                            maximumFractionDigits: 2,
+                            style: "currency",
+                            currency: "INR",
+                          }
+                        )
                       : "0.00"
                     : "0.00"}
                 </h1>
