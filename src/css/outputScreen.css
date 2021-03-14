@@ -1,0 +1,202 @@
+.output-area {
+  background-color: #fff;
+  min-width: 350px;
+  min-height: 80vh;
+  position: absolute;
+  top: 50%;
+  right: -50%;
+  transform: translate(-10%, -50%);
+}
+
+.large-viewport {
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  margin: 1.5rem 2rem;
+  align-items: center;
+}
+
+.large-viewport > h3 {
+  font-family: "MBold";
+  font-size: 1rem;
+  margin-bottom: 1rem;
+  margin-top: 1.5rem;
+}
+
+.large-viewport > h1 {
+  font-family: "MRegular";
+  font-size: 3rem;
+  margin-bottom: 2rem;
+}
+
+.large-viewport > h1 > span {
+  font-family: "MLight";
+  font-size: 1.5rem;
+}
+
+.large-viewport > div {
+  display: flex;
+  justify-content: space-between;
+  padding: 1rem;
+  width: 100%;
+}
+
+.large-viewport > div > h5 {
+  font-family: "MRegular";
+  color: rgb(94, 89, 89);
+}
+
+.large-viewport > hr {
+  width: 90%;
+  margin: auto;
+  height: 1px;
+  border: none;
+  background-color: rgb(94, 89, 89);
+}
+
+.large-viewport > button {
+  font-family: "MLight";
+  font-size: 1rem;
+  border: none;
+  outline: none;
+  cursor: pointer;
+}
+
+.btn-simple {
+  background-color: transparent;
+  text-decoration: underline;
+  color: rgb(94, 89, 89);
+  margin: 0.5rem;
+}
+
+.btn-color {
+  width: 90%;
+  height: 40px;
+  line-height: 40px;
+  border: none;
+  border-radius: 1px;
+  background-color: #feb931;
+  color: #000;
+  transition: all 200ms ease-in-out;
+  margin: 2rem auto;
+}
+
+.btn-color:hover {
+  background-color: #daa520;
+}
+
+.btn-color:focus {
+  background-color: #daa520;
+  outline: none;
+}
+
+.small-viewport {
+  display: none;
+}
+
+@media (max-width: 992px) {
+  .large-viewport {
+    display: none;
+  }
+  .output-area {
+    height: 100%;
+    width: 100%;
+    position: absolute;
+    top: 50%;
+    right: 0;
+    left: 0;
+    transform: translate(0, -50%);
+  }
+
+  .small-viewport {
+    display: flex;
+    height: 100%;
+    color: #fff;
+  }
+
+  .left-content {
+    width: 60%;
+    height: 100%;
+    background-color: #000;
+  }
+
+  .left-content-wrapper > button {
+    background: transparent;
+    border: none;
+    margin-bottom: 1rem;
+    cursor: pointer;
+  }
+
+  .left-content-wrapper {
+    margin: 10% 10% auto 10%;
+  }
+
+  .left-content-wrapper > h1 {
+    font-size: 2.5rem;
+    font-family: "MBold";
+    line-height: 3rem;
+  }
+
+  .first-heading {
+    margin-top: 1.5rem;
+  }
+
+  .left-content-wrapper > p {
+    font-size: 1rem;
+    font-family: "MLight";
+    margin-top: 1rem;
+  }
+
+  .result {
+    display: flex;
+    margin: 2rem auto;
+  }
+
+  .result-left {
+    border-right: 1px solid white;
+    padding: 1rem;
+  }
+
+  .result-left > h3 {
+    font-size: 1rem;
+    font-family: "MMedium";
+  }
+
+  .result-left > h1 {
+    font-size: 2rem;
+    margin-top: 0.5rem;
+    font-family: "MRegular";
+  }
+
+  .result-right {
+    padding: 1rem;
+    min-width: 200px;
+  }
+
+  .result-right > div {
+    display: flex;
+    font-size: 1rem;
+    font-family: "MMedium";
+    margin: 0.5rem;
+    justify-content: space-between;
+  }
+
+  .right-content {
+    width: 40%;
+    height: 100%;
+    background-color: #000;
+    background-image: url("../images/money.png");
+    background-position: left;
+    background-repeat: no-repeat;
+    background-size: cover;
+  }
+}
+
+@media (max-width: 570px) {
+  .left-content {
+    width: 100%;
+  }
+  .right-content {
+    display: none;
+  }
+}

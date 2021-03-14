@@ -1,13 +1,44 @@
-body {
+* {
   margin: 0;
-  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
-    'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
-    sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
+  padding: 0;
+  box-sizing: border-box;
 }
 
-code {
-  font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
-    monospace;
+html {
+  font-size: 16px;
+}
+
+span {
+  font-family: "MLight";
+  font-size: 0.8rem;
+}
+
+@font-face {
+  src: url("./fonts/MLight.ttf");
+  font-weight: 300;
+  font-family: "MLight";
+}
+
+@font-face {
+  src: url("./fonts/MRegular.ttf");
+  font-weight: 400;
+  font-family: "MRegular";
+}
+
+@font-face {
+  src: url("./fonts/MMedium.ttf");
+  font-weight: 500;
+  font-family: "MMedium";
+}
+
+@font-face {
+  src: url("./fonts/MBold.ttf");
+  font-weight: 600;
+  font-family: "MBold";
+}
+
+@font-face {
+  src: url("./fonts/MExtraBold.ttf");
+  font-weight: 700;
+  font-family: "MExtraBold";
 }
