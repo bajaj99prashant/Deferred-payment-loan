@@ -12,17 +12,29 @@ const MainContent = () => {
   const [principleStyle, setPrincipalStyle] = useState({});
   const [timeStyle, setTimeStyle] = useState({});
 
-  const changeInput = (e, setInput, setStyle, styleObject) => {
-    setInput(e.target.value);
+  const changeInput = (e, inputType) => {
     const left = `${(e.target.value / (e.target.max - e.target.min)) * 100}%`;
-    setStyle({ ...styleObject, left: left });
+    if (inputType === "principal") {
+      setPrincipal(e.target.value);
+      setPrincipalStyle({ ...principleStyle, left: left });
+    } else if (inputType === "rate") {
+      setRate(e.target.value);
+      setRateStyle({ ...rateStyle, left: left });
+    } else if (inputType === "time") {
+      setTime(e.target.value);
+      setTimeStyle({ ...timeStyle, left: left });
+    }
   };
 
   const calculateAmount = (e) => {
     e.preventDefault();
-    const amount =
-      parseInt(principal) + parseInt((principal * rate * time) / 100);
-    if (amount > 0) {
+    const newRate = parseFloat(rate / 1200);
+    if (time > 0) {
+      const top = parseFloat(Math.pow(1 + newRate, time));
+      const bottom = parseFloat(top - 1);
+      const ratio = parseFloat(top / bottom);
+      const amount = parseFloat(principal * newRate * ratio);
+      console.log(amount);
       dispatch({
         type: "INTEREST_CALCULATED",
         amount: amount,
@@ -30,9 +42,11 @@ const MainContent = () => {
         principal: principal,
       });
     } else {
+      const amount = parseFloat(principal * newRate) + parseFloat(principal);
+      console.log(amount);
       dispatch({
         type: "INTEREST_CALCULATED",
-        amount: null,
+        amount: amount,
         time: time,
         principal: principal,
       });
@@ -52,7 +66,11 @@ const MainContent = () => {
           <div className="input-group">
             <div className="label-group">
               <span>Principal</span>
-              <span>{(principal / 100000).toFixed(2)} Lakhs</span>
+              <span>
+                {Number(parseFloat(principal).toFixed(2)).toLocaleString("en", {
+                  minimumFractionDigits: 2,
+                })}
+              </span>
             </div>
             <div className="slider-wrapper">
               <div className="show-value">
@@ -64,14 +82,7 @@ const MainContent = () => {
                 type="range"
                 name="principal"
                 value={principal}
-                onChange={(e) =>
-                  changeInput(
-                    e,
-                    setPrincipal,
-                    setPrincipalStyle,
-                    principleStyle
-                  )
-                }
+                onChange={(e) => changeInput(e, "principal")}
                 min="0"
                 step="50000"
                 max="1000000"
@@ -94,9 +105,7 @@ const MainContent = () => {
                 type="range"
                 name="rate"
                 value={rate}
-                onChange={(e) =>
-                  changeInput(e, setRate, setRateStyle, rateStyle)
-                }
+                onChange={(e) => changeInput(e, "rate")}
                 min="0"
                 step="0.5"
                 max="20"
@@ -110,22 +119,20 @@ const MainContent = () => {
           <div className="input-group">
             <div className="label-group">
               <span>Time</span>
-              <span>{time} Yrs</span>
+              <span>{time} Months</span>
             </div>
             <div className="slider-wrapper">
               <div className="show-value">
-                <span style={timeStyle}>{`${time}Y`}</span>
+                <span style={timeStyle}>{`${time}M`}</span>
               </div>
               <input
                 type="range"
                 name="principal"
                 value={time}
-                onChange={(e) =>
-                  changeInput(e, setTime, setTimeStyle, timeStyle)
-                }
+                onChange={(e) => changeInput(e, "time")}
                 min="0"
-                step="0.5"
-                max="10"
+                step="1"
+                max="24"
               />
               <span className="range-label">Min</span>
               <span className="range-label range-label-right">Max</span>

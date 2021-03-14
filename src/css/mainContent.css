@@ -47,6 +47,8 @@
   position: relative;
   width: 100%;
   height: 20px;
+  margin-bottom: 2px;
+  margin-top: 2px;
 }
 
 .show-value > span {
@@ -69,7 +71,7 @@
 .range-label {
   position: absolute;
   left: 0;
-  font-size: 0.8rem;
+  font-size: 0.6rem;
   bottom: -30%;
 }
 

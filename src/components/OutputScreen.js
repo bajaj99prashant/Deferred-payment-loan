@@ -22,18 +22,41 @@ const OutputScreen = () => {
         <h3>Your monthly payment</h3>
         <h1>
           <span>₹</span>
-          {state.amount !== null
-            ? parseFloat(state.amount / (state.time * 12)).toFixed(2)
+          {state.amount > 0 && !isNaN(state.amount)
+            ? parseFloat(state.amount).toFixed(2)
             : "0.00"}
         </h1>
         <div>
           <h5>Total principal paid</h5>
-          <span>₹{state.principal !== null ? state.principal : "0.00"}</span>
+          <span>
+            ₹
+            {state.principal !== null
+              ? Number(parseFloat(state.principal).toFixed(2)).toLocaleString(
+                  "en",
+                  {
+                    minimumFractionDigits: 2,
+                  }
+                )
+              : "0.00"}
+          </span>
         </div>
         <hr />
         <div>
           <h5>Total interest paid</h5>
-          <span>₹{parseFloat(state.amount - state.principal).toFixed(2)}</span>
+          <span>
+            ₹
+            {!isNaN(state.amount)
+              ? state.time > 0 && state.principal > 0
+                ? Number(
+                    parseFloat(
+                      state.amount * state.time - state.principal
+                    ).toFixed(2)
+                  ).toLocaleString("en", {
+                    minimumFractionDigits: 2,
+                  })
+                : parseFloat(state.amount - state.principal).toFixed(2)
+              : "0.00"}
+          </span>
         </div>
         <button className="btn-color">Compare loan rates</button>
         <button className="btn-simple">Show authorization schedule</button>
@@ -55,11 +78,13 @@ const OutputScreen = () => {
             </p>
             <div className="result">
               <div className="result-left">
-                <h3>your monthly payment</h3>
+                <h3>Your monthly payment</h3>
                 <h1>
                   <span>₹</span>
                   {state.amount !== null
-                    ? parseFloat(state.amount / (state.time * 12)).toFixed(2)
+                    ? state.amount > 0
+                      ? parseFloat(state.amount / state.time).toFixed(2)
+                      : "0.00"
                     : "0.00"}
                 </h1>
               </div>
@@ -67,7 +92,10 @@ const OutputScreen = () => {
                 <div>
                   <h5>Total principal paid</h5>
                   <span>
-                    ₹{state.principal !== null ? state.principal : "0.00"}
+                    ₹
+                    {state.principal !== null
+                      ? parseFloat(state.principal).toFixed(2)
+                      : "0.00"}
                   </span>
                 </div>
                 <div>
